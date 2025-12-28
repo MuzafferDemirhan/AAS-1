@@ -14,10 +14,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #eff3f8; /* Light gray-blue background */
+            background-color: #eff3f8;
             color: #333;
             height: 100vh;
-            overflow: hidden; /* Prevent body scroll */
+            overflow: hidden;
         }
 
         /* --- Layout Container --- */
@@ -26,14 +26,14 @@
             height: 100%;
         }
 
-        /* --- Sidebar (Consistent) --- */
+        /* --- Sidebar --- */
         .sidebar {
             width: 260px;
             background-color: #f8f9fa;
             border-right: 1px solid #e0e0e0;
             display: flex;
             flex-direction: column;
-            padding: 24px 20px;
+            padding: 20px;
             flex-shrink: 0;
         }
 
@@ -41,8 +41,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 35px;
-            padding-left: 5px;
+            margin-bottom: 30px;
+            padding-left: 10px;
         }
 
         .avatar {
@@ -68,9 +68,10 @@
         .nav-menu {
             list-style: none;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
         }
 
         .nav-link {
@@ -83,7 +84,7 @@
             color: #5f6368;
             font-size: 14px;
             font-weight: 500;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         .nav-link:hover {
@@ -91,11 +92,18 @@
             color: #202124;
         }
 
+        /* Active State */
         .nav-link.active {
-            background-color: #dbeafe;
+            background-color: #e8f0fe;
             color: #1967d2;
         }
 
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Logout */
         .logout-link {
             display: flex;
             align-items: center;
@@ -107,7 +115,7 @@
             font-weight: 500;
             margin-top: auto;
         }
-
+        
         .logout-link:hover {
             color: #d93025;
         }
@@ -245,9 +253,9 @@
             <div class="profile-section">
                 <div class="avatar">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="#ced4da">
-                        <circle cx="20" cy="20" r="20" fill="#e5e7eb"/>
-                        <circle cx="20" cy="15" r="7" fill="#9ca3af"/>
-                        <path d="M20 23c-6 0-11 3.5-11 9h22c0-5.5-5-9-11-9z" fill="#9ca3af"/>
+                        <rect width="40" height="40" />
+                        <circle cx="20" cy="15" r="8" fill="#fff" />
+                        <path d="M20 25c-6 0-11 4-11 9v6h22v-6c0-5-5-9-11-9z" fill="#fff" />
                     </svg>
                 </div>
                 <div class="profile-name">Profile</div>
@@ -268,13 +276,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link active">
+                        <a href="manual_attendance.html" class="nav-link active">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             Manual Attendance
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="reports.html" class="nav-link">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             Attendance Reports
                         </a>
@@ -282,7 +290,7 @@
                 </ul>
             </nav>
 
-            <a href="#" class="logout-link">
+            <a href="login.html" class="logout-link" onclick="return confirmLogout()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Logout
             </a>
@@ -297,35 +305,28 @@
                     <h2 class="card-header">Record Attendance</h2>
                     <form onsubmit="event.preventDefault();">
                         <div class="form-group">
-                            <label class="form-label">Select User</label>
-                            <select class="form-control">
-                                <option>Select User</option>
-                                <option>John Doe</option>
-                                <option>Jane Smith</option>
+                            <label class="form-label">Select Student</label>
+                            <select id="studentSelect" class="form-control">
+                                <option value="">Select Student</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Date</label>
-                            <input type="date" class="form-control" value="2023-10-25">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Time</label>
-                            <input type="time" class="form-control">
+                            <label class="form-label">Select Session</label>
+                            <select id="sessionSelect" class="form-control">
+                                <option value="">Select Session</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Status</label>
-                            <select class="form-control">
-                                <option>Present, Absent, Late</option>
-                                <option>Present</option>
-                                <option>Late</option>
-                                <option>Absent</option>
+                            <select id="statusSelect" class="form-control">
+                                <option value="true">Present</option>
+                                <option value="false">Absent</option>
                             </select>
                         </div>
 
-                        <button class="btn-submit">Submit</button>
+                        <button class="btn-submit" onclick="submitManualAttendance(); return false;">Submit</button>
                     </form>
                 </div>
 
@@ -342,62 +343,9 @@
                                     <th class="col-admin">Recorded By</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="entriesTableBody">
                                 <tr>
-                                    <td>Muzaffer Demirhan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Justin Roan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Muzaffer Demirhan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Laura Ruan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Justin Ruan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>John Araton</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Muzaffer Demirhan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Muzaffer Demirhan</td>
-                                    <td>Oct 25</td>
-                                    <td>9:00 AM</td>
-                                    <td>Present</td>
-                                    <td>Admin</td>
+                                    <td colspan="5" style="text-align: center; padding: 20px; color: #999;">Loading...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -407,6 +355,156 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            document.querySelector('.profile-name').textContent = user.name || 'User';
+        }
+        
+        let studentsData = [];
+        let sessionsData = [];
+        
+        // Load students from database
+        async function loadStudents() {
+            try {
+                const response = await fetch('/api/students');
+                const students = await response.json();
+                studentsData = students;
+                
+                const select = document.getElementById('studentSelect');
+                select.innerHTML = '<option value="">Select Student</option>' +
+                    students.map(s => `<option value="${s.StudentID}">${s.FullName}</option>`).join('');
+            } catch (error) {
+                console.error('Error loading students:', error);
+            }
+        }
+        
+        // Load sessions
+        async function loadSessions() {
+            try {
+                const response = await fetch('/api/sessions');
+                const sessions = await response.json();
+                sessionsData = sessions;
+                
+                const select = document.getElementById('sessionSelect');
+                select.innerHTML = '<option value="">Select Session</option>' +
+                    sessions.map(s => {
+                        const date = new Date(s.SessionDate).toLocaleDateString();
+                        const time = s.StartTime ? s.StartTime.substring(0, 5) : '';
+                        return `<option value="${s.SessionID}">Session ${s.SessionID} - ${date} ${time}</option>`;
+                    }).join('');
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+            }
+        }
+        
+        // Load recent manual entries
+        async function loadRecentEntries() {
+            try {
+                const response = await fetch('/api/attendance');
+                const records = await response.json();
+                
+                const tbody = document.getElementById('entriesTableBody');
+                if (records.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 20px; color: #999;">No entries yet</td></tr>';
+                    return;
+                }
+                
+                // Get details for each record
+                const entriesWithDetails = await Promise.all(
+                    records.slice(0, 10).map(async (record) => {
+                        try {
+                            const studentRes = await fetch(`/api/students/${record.StudentID}`);
+                            const student = await studentRes.json();
+                            const sessionRes = await fetch(`/api/sessions/${record.SessionID}`);
+                            const session = await sessionRes.json();
+                            return {
+                                ...record,
+                                studentName: student.FullName || 'Unknown',
+                                sessionDate: session.SessionDate ? new Date(session.SessionDate).toLocaleDateString() : 'N/A',
+                                sessionTime: session.StartTime ? session.StartTime.substring(0, 5) : 'N/A'
+                            };
+                        } catch (err) {
+                            return {
+                                ...record,
+                                studentName: 'Unknown',
+                                sessionDate: 'N/A',
+                                sessionTime: 'N/A'
+                            };
+                        }
+                    })
+                );
+                
+                tbody.innerHTML = entriesWithDetails.map(entry => `
+                    <tr>
+                        <td>${entry.studentName}</td>
+                        <td>${entry.sessionDate}</td>
+                        <td>${entry.sessionTime}</td>
+                        <td>${entry.PresentFlag ? 'Present' : 'Absent'}</td>
+                        <td>${user.name || 'Admin'}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading recent entries:', error);
+                document.getElementById('entriesTableBody').innerHTML = 
+                    '<tr><td colspan="5" style="text-align: center; padding: 20px; color: #f44336;">Error loading entries</td></tr>';
+            }
+        }
+        
+        // Submit manual attendance
+        async function submitManualAttendance() {
+            const studentId = document.getElementById('studentSelect').value;
+            const sessionId = document.getElementById('sessionSelect').value;
+            const status = document.getElementById('statusSelect').value;
+            
+            if (!studentId || !sessionId) {
+                alert('Please select both student and session');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/attendance', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        StudentID: parseInt(studentId),
+                        SessionID: parseInt(sessionId),
+                        PresentFlag: status === 'true'
+                    })
+                });
+                
+                const data = await response.json();
+                alert('Attendance recorded successfully!');
+                
+                // Reset form
+                document.getElementById('studentSelect').value = '';
+                document.getElementById('sessionSelect').value = '';
+                
+                // Reload recent entries
+                loadRecentEntries();
+            } catch (error) {
+                console.error('Error submitting attendance:', error);
+                alert('Error recording attendance');
+            }
+        }
+        
+        // Load data on page load
+        loadStudents();
+        loadSessions();
+        loadRecentEntries();
+        
+        // Logout functionality
+        function confirmLogout() {
+            localStorage.removeItem('user');
+            return true;
+        }
+    </script>
 
 </body>
 </html>

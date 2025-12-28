@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f4f9; /* Matches the light blue-gray background */
+            background-color: #eff3f8;
             color: #333;
             height: 100vh;
             overflow: hidden;
@@ -28,12 +28,12 @@
 
         /* --- Sidebar --- */
         .sidebar {
-            width: 250px;
+            width: 260px;
             background-color: #f8f9fa;
             border-right: 1px solid #e0e0e0;
             display: flex;
             flex-direction: column;
-            padding: 24px 16px;
+            padding: 20px;
             flex-shrink: 0;
         }
 
@@ -41,13 +41,13 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 35px;
-            padding-left: 8px;
+            margin-bottom: 30px;
+            padding-left: 10px;
         }
 
         .avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background-color: #ddd;
             overflow: hidden;
@@ -61,29 +61,30 @@
 
         .profile-name {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: #202124;
         }
 
         .nav-menu {
             list-style: none;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
         }
 
         .nav-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 16px;
+            padding: 12px 16px;
             border-radius: 8px;
             text-decoration: none;
             color: #5f6368;
             font-size: 14px;
             font-weight: 500;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         .nav-link:hover {
@@ -91,23 +92,30 @@
             color: #202124;
         }
 
+        /* Active State */
         .nav-link.active {
-            background-color: #dbeafe; /* Light blue active background */
+            background-color: #e8f0fe;
             color: #1967d2;
         }
 
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Logout */
         .logout-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 16px;
+            padding: 12px 16px;
             text-decoration: none;
             color: #5f6368;
             font-size: 14px;
             font-weight: 500;
             margin-top: auto;
         }
-
+        
         .logout-link:hover {
             color: #d93025;
         }
@@ -323,10 +331,10 @@
         <aside class="sidebar">
             <div class="profile-section">
                 <div class="avatar">
-                    <svg width="36" height="36" viewBox="0 0 36 36" fill="#9ca3af">
-                        <circle cx="18" cy="18" r="18" fill="#e5e7eb"/>
-                        <circle cx="18" cy="13" r="6" fill="#9ca3af"/>
-                        <path d="M18 21c-5 0-9 3-9 8h18c0-5-4-8-9-8z" fill="#9ca3af"/>
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="#ced4da">
+                        <rect width="40" height="40" />
+                        <circle cx="20" cy="15" r="8" fill="#fff" />
+                        <path d="M20 25c-6 0-11 4-11 9v6h22v-6c0-5-5-9-11-9z" fill="#fff" />
                     </svg>
                 </div>
                 <div class="profile-name">Profile</div>
@@ -341,19 +349,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link active">
+                        <a href="attendance.html" class="nav-link active">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             Attendance
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="manual_attendance.html" class="nav-link">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             Manual Attendance
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="reports.html" class="nav-link">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             Attendance Reports
                         </a>
@@ -361,7 +369,7 @@
                 </ul>
             </nav>
 
-            <a href="#" class="logout-link">
+            <a href="login.html" class="logout-link" onclick="return confirmLogout()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Logout
             </a>
@@ -452,6 +460,53 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            document.querySelector('.profile-name').textContent = user.name || 'User';
+        }
+        
+        // Load sessions from database
+        async function loadSessions() {
+            try {
+                const response = await fetch('/api/sessions');
+                const sessions = await response.json();
+                
+                console.log('Loaded sessions:', sessions);
+                // You can update UI with session data here
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+            }
+        }
+        
+        // Load attendance records
+        async function loadAttendance() {
+            try {
+                const response = await fetch('/api/attendance');
+                const records = await response.json();
+                
+                console.log('Loaded attendance records:', records);
+                // Update stats
+                document.querySelector('.stat-value').textContent = records.length || 1450;
+            } catch (error) {
+                console.error('Error loading attendance:', error);
+            }
+        }
+        
+        // Load data on page load
+        loadSessions();
+        loadAttendance();
+        
+        // Logout functionality
+        function confirmLogout() {
+            localStorage.removeItem('user');
+            return true;
+        }
+    </script>
 
 </body>
 </html>

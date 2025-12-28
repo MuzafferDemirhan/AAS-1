@@ -281,9 +281,70 @@
         </form>
 
         <div class="footer">
-            Don't have an account? <a href="#">Register Now</a>
+            Don't have an account? <a href="register.html">Register Now</a>
         </div>
     </div>
+
+    <script>
+        // Handle login form submission
+        document.querySelector('form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.querySelector('.btn-login');
+            
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+            
+            // Disable button and show loading
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    alert('Login successful!');
+                    // Store user info
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.message || 'Login failed. Please check your credentials.');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Login';
+                }
+            } catch (error) {
+                alert('Error connecting to server. Please try again.');
+                console.error('Login error:', error);
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login';
+            }
+        });
+        
+        // Password toggle visibility
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+        });
+        
+        // Face scan button (mock functionality)
+        document.querySelector('.btn-face-scan').addEventListener('click', function() {
+            alert('Face scan feature is disabled in this version.');
+        });
+    </script>
 
 </body>
 </html>

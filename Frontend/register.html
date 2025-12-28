@@ -234,5 +234,97 @@
         </div>
     </div>
 
+    <script>
+        // Handle register form submission
+        document.querySelector('form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('fullname').value;
+            const email = document.getElementById('work-email').value;
+            const password = document.getElementById('password').value;
+            const registerBtn = document.querySelector('.btn-primary');
+            
+            if (!name || !email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+            
+            // Disable button and show loading
+            registerBtn.disabled = true;
+            registerBtn.textContent = 'Creating Account...';
+            
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    alert('Registration successful! Please login.');
+                    // Redirect to login page
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message || 'Registration failed. Please try again.');
+                    registerBtn.disabled = false;
+                    registerBtn.textContent = 'Create Account';
+                }
+            } catch (error) {
+                alert('Error connecting to server. Please try again.');
+                console.error('Registration error:', error);
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Create Account';
+            }
+        });
+        
+        // File upload handling
+        const fileInput = document.querySelector('.file-input');
+        const uploadBox = document.querySelector('.upload-box');
+        
+        uploadBox.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const uploadText = document.querySelector('.upload-text');
+                uploadText.textContent = `Selected: ${file.name}`;
+            }
+        });
+        
+        // Drag and drop
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.style.borderColor = '#1967d2';
+            uploadBox.style.backgroundColor = '#f0f7ff';
+        });
+        
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.style.borderColor = '#d1d5db';
+            uploadBox.style.backgroundColor = '#f9fafb';
+        });
+        
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.style.borderColor = '#d1d5db';
+            uploadBox.style.backgroundColor = '#f9fafb';
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.match('image.*')) {
+                fileInput.files = e.dataTransfer.files;
+                const uploadText = document.querySelector('.upload-text');
+                uploadText.textContent = `Selected: ${file.name}`;
+            }
+        });
+    </script>
+
 </body>
 </html>

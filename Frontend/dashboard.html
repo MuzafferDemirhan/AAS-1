@@ -14,10 +14,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #eff3f8; /* Main background color */
+            background-color: #eff3f8;
             color: #333;
             height: 100vh;
-            overflow: hidden; /* Prevent body scroll, let content scroll */
+            overflow: hidden;
         }
 
         /* --- Layout Container --- */
@@ -244,32 +244,32 @@
 
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                    <a href="dashboard.html" class="nav-link active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                         Main Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="attendance.html" class="nav-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         Attendance
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="manual_attendance.html" class="nav-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         Manual Attendance
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="reports.html" class="nav-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                         Attendance Reports
                     </a>
                 </li>
             </ul>
 
-            <a href="#" class="logout-link">
+            <a href="login.html" class="logout-link" onclick="return confirmLogout()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Logout
             </a>
@@ -340,6 +340,55 @@
 
         </main>
     </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+            window.location.href = 'login.html';
+        } else {
+            // Update profile name
+            document.querySelector('.profile-name').textContent = user.name || 'User';
+        }
+        
+        // Prevent navigation to current page (prevents page jump)
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) {
+                activeLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        });
+        
+        // Load dashboard stats
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('/api/dashboard/stats');
+                const data = await response.json();
+                
+                // Update stat cards (if API returns data)
+                if (data.totalStudents !== undefined) {
+                    document.querySelectorAll('.stat-info p')[0].textContent = data.totalStudents;
+                }
+                if (data.totalCourses !== undefined) {
+                    document.querySelectorAll('.stat-info p')[1].textContent = data.totalCourses;
+                }
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+            }
+        }
+        
+        // Load stats on page load
+        loadDashboardStats();
+        
+        // Logout functionality
+        function confirmLogout() {
+            localStorage.removeItem('user');
+            return true;
+        }
+    </script>
 
 </body>
 </html>
