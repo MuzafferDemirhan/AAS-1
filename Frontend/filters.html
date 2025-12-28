@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GTS — Filters</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <b>GTS</b>
+          <span>Filters</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="dashboard.html">Back to Dashboard</a>
+      </div>
+    </header>
+
+    <div class="hrow">
+      <div>
+        <h1>Filter Theses</h1>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="pad">
+        <!-- GET form sends query params to theses.html (no JavaScript needed) -->
+        <form class="form" action="theses.html" method="get">
+          <div class="row">
+            <div>
+              <label for="q">Title contains</label>
+              <input id="q" name="q" type="text" placeholder="" />
+            </div>
+            <div>
+              <label for="year">Year</label>
+              <input id="year" name="year" type="text" placeholder="" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="uni">University</label>
+              <select id="uni" name="university">
+                <option value=""></option>
+              </select>
+              <div class="helper"></div>
+            </div>
+
+            <div>
+              <label for="inst">Institute</label>
+              <select id="inst" name="institute">
+                <option value=""></option>
+              </select>
+              <div class="helper"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="type">Thesis Type</label>
+              <select id="type" name="type">
+                <option value=""></option>
+              </select>
+            </div>
+            <div>
+              <label for="lang">Language</label>
+              <select id="lang" name="language">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="topic">Subject / Topic</label>
+              <input id="topic" name="topic" type="text" placeholder="" />
+              <div class="helper"></div>
+            </div>
+            <div>
+              <label for="keyword">Keyword</label>
+              <input id="keyword" name="keyword" type="text" placeholder="" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="pages_min">Pages (min)</label>
+              <input id="pages_min" name="pages_min" type="text" placeholder="" />
+            </div>
+            <div>
+              <label for="pages_max">Pages (max)</label>
+              <input id="pages_max" name="pages_max" type="text" placeholder="" />
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+            <button class="btn primary" type="submit">Apply Filters</button>
+            <a class="btn" href="filters.html">Reset</a>
+          </div>
+
+          <p class="helper" style="margin:8px 0 0;">
+            
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

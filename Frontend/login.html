@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAttend AI Login</title>
+    <style>
+        /* --- General Reset & Typography --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #eff3f8; /* Light gray-blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* --- Card Container --- */
+        .login-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* --- Header / Logo section --- */
+        .logo {
+            margin-bottom: 15px;
+        }
+        
+        .logo svg {
+            width: 48px;
+            height: 48px;
+            color: #1967d2; /* Primary Blue */
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* --- Face Scan Button --- */
+        .btn-face-scan {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background-color: white;
+            border: 2px solid #1967d2;
+            color: #1967d2;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-face-scan:hover {
+            background-color: #f0f7ff;
+        }
+
+        .btn-face-scan svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- Divider --- */
+        .divider {
+            margin: 25px 0;
+            color: #888;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #1967d2;
+            box-shadow: 0 0 0 3px rgba(25, 103, 210, 0.1);
+        }
+
+        /* Eye Icon for Password */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- Options Row (Remember Me / Forgot Password) --- */
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            width: 16px;
+            height: 16px;
+            accent-color: #1967d2;
+            border-radius: 4px;
+        }
+
+        .forgot-password {
+            color: #1967d2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Primary Login Button --- */
+        .btn-login {
+            width: 100%;
+            background-color: #1967d2;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: #1356b5;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer a {
+            color: #1967d2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Decoration sparkles bottom right (optional match for image) */
+        .bg-sparkle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3"></path>
+                <path d="M20 7V4h-3"></path>
+                <path d="M20 17v3h-3"></path>
+                <path d="M4 17v3h3"></path>
+                <path d="M12 20l-4-9 1.5-4h5l1.5 4-4 9"></path> 
+                <line x1="9.5" y1="15" x2="14.5" y2="15"></line>
+            </svg>
+        </div>
+
+        <h1>SmartAttend AI</h1>
+        <p class="subtitle">Welcome back! Please login to continue.</p>
+
+        <button class="btn-face-scan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            Scan Face to Login
+        </button>
+
+        <div class="divider">--- OR ---</div>
+
+        <form onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" value="" placeholder="Enter your email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" value="" placeholder="Enter your password">
+                    <span class="toggle-password">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="options-row">
+                <label class="remember-me">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+
+        <div class="footer">
+            Don't have an account? <a href="#">Register Now</a>
+        </div>
+    </div>
+
+</body>
+</html>

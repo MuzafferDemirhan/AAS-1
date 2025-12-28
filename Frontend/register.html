@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAttend AI - Create Account</title>
+    <style>
+        /* --- General Reset & Typography --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #eff3f8; /* Light gray-blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* --- Card Container --- */
+        .register-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* --- Header / Logo section --- */
+        .logo {
+            margin-bottom: 15px;
+        }
+        
+        .logo svg {
+            width: 48px;
+            height: 48px;
+            color: #1967d2; /* Primary Blue */
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #1967d2;
+            box-shadow: 0 0 0 3px rgba(25, 103, 210, 0.1);
+        }
+
+        /* --- Upload Area Specifics --- */
+        .upload-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Actual file input hidden but clickable */
+        .file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-box {
+            border: 2px dashed #a1c4f5; /* Light blue dashed border */
+            background-color: #eff6ff; /* Very light blue fill */
+            border-radius: 8px;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #5f6368;
+            transition: all 0.2s;
+        }
+
+        .upload-container:hover .upload-box {
+            border-color: #1967d2;
+            background-color: #e8f0fe;
+        }
+
+        .upload-icon {
+            color: #5f6368;
+            margin-bottom: 8px;
+        }
+        
+        .upload-text {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        /* --- Buttons --- */
+        .btn-primary {
+            width: 100%;
+            background-color: #1967d2;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #1356b5;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer a {
+            color: #1967d2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-card">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3"></path>
+                <path d="M20 7V4h-3"></path>
+                <path d="M20 17v3h-3"></path>
+                <path d="M4 17v3h3"></path>
+                <path d="M12 20l-4-9 1.5-4h5l1.5 4-4 9"></path> 
+                <line x1="9.5" y1="15" x2="14.5" y2="15"></line>
+            </svg>
+        </div>
+
+        <h1>SmartAttend AI</h1>
+        <p class="subtitle">Create Account. Set up your profile for AI Attendance.</p>
+
+        <form onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" value="" placeholder="e.g. Muzaffer Demirhan">
+            </div>
+
+            <div class="form-group">
+                <label for="work-email">Work Email</label>
+                <input type="email" id="work-email" value="" placeholder="mzff@mail.com">
+            </div>
+
+            <div class="form-group">
+                <label>AI Enrollment Photo</label>
+                <div class="upload-container">
+                    <input type="file" class="file-input" accept=".jpg, .png">
+                    <div class="upload-box">
+                        <div class="upload-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.2 15c.7 0 1.7.6 1.7 1.7 0 1.7-1.4 2.9-3.1 3.1H6c-2.6-.1-4.9-2.2-5-4.8 0-2.3 1.6-4.3 3.8-4.8.3-3.1 3.1-5.3 6.2-5 2.4.2 4.4 1.9 5.1 4.3"></path>
+                                <path d="M12 12v9"></path>
+                                <path d="M16 16l-4-4-4 4"></path>
+                            </svg>
+                        </div>
+                        <div class="upload-text">
+                            Drag and drop a clear frontal photo or click to browse. (JPG, PNG. Max 5MB)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" value="" placeholder="Create a password">
+            </div>
+
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+
+        <div class="footer">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+
+</body>
+</html>
