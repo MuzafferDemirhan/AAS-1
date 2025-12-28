@@ -91,3 +91,5 @@ CREATE TABLE "Instructor" (
     "Email" VARCHAR(254),
     "Department" VARCHAR(100)
 );
+
+#For jira
