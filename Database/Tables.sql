@@ -84,3 +84,10 @@ CREATE TABLE "LegalHold" (
     "HoldEnd" DATE,
     "HoldOpen" BOOLEAN
 );
+
+CREATE TABLE "Instructor" (
+    "InstructorID" SERIAL PRIMARY KEY,
+    "FullName" VARCHAR(255),
+    "Email" VARCHAR(254),
+    "Department" VARCHAR(100)
+);
